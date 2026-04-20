@@ -1,0 +1,307 @@
+/* ═══════════════════════════════════════════════════════
+   TASWIRA SPACE INK v2 — Mobile Responsive Layout
+   Breakpoints: 900px (tablet), 600px (mobile)
+   Mobile paradigm: fullscreen map + bottom drawer
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── Tablet Layout (≤ 900px) ──────────────────────────── */
+@media (max-width: 900px) {
+  :root {
+    --panel-l-body: 240px;
+    --panel-l-total: 288px;
+  }
+
+  .toolbar-search { max-width: 320px; }
+
+  .tb-btn span { display: none; }
+  .tb-btn { padding: 7px 10px; }
+  .tb-btn svg { margin: 0; }
+
+  .theme-grid { grid-template-columns: repeat(2, 1fr); }
+  .preset-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ─── Mobile Layout (≤ 640px) ──────────────────────────── */
+@media (max-width: 640px) {
+
+  /* ── Override app grid for mobile ──────────────────── */
+  #app {
+    display: grid;
+    grid-template-rows: var(--toolbar-h) 1fr auto;
+    grid-template-columns: 1fr;
+  }
+
+  /* ── Toolbar: compact ──────────────────────────────── */
+  #toolbar {
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .brand-name { font-size: 14px; }
+  .brand-version { display: none; }
+
+  .toolbar-search { max-width: none; flex: 1; }
+  .toolbar-search input { font-size: 12px; }
+
+  .tb-btn-share,
+  #btn-load-geojson,
+  #btn-load-uav,
+  #btn-add-text { display: none; }
+
+  .tb-btn-export { padding: 7px 14px; }
+  .tb-divider { display: none; }
+
+  /* ── Hide sidebar, show fullscreen map ─────────────── */
+  #panel-left { display: none; }
+
+  #main-layout {
+    display: block;
+    position: relative;
+    height: 100%;
+  }
+
+  #canvas-area {
+    position: absolute;
+    inset: 0;
+  }
+
+  /* ── Mobile Bottom Drawer ──────────────────────────── */
+  #mobile-drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border);
+    border-radius: 18px 18px 0 0;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 72vh;
+    transform: translateY(calc(100% - 60px)); /* collapsed */
+    touch-action: none;
+    will-change: transform;
+  }
+
+  #mobile-drawer.expanded {
+    transform: translateY(0);
+  }
+
+  /* Drag handle */
+  #drawer-handle {
+    width: 100%;
+    padding: 10px 0 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: grab;
+    touch-action: none;
+  }
+
+  #drawer-handle:active { cursor: grabbing; }
+
+  .drawer-handle-bar {
+    width: 36px;
+    height: 4px;
+    background: var(--border-md);
+    border-radius: 2px;
+  }
+
+  /* Drawer tab bar */
+  #drawer-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex-shrink: 0;
+  }
+
+  #drawer-tabs::-webkit-scrollbar { display: none; }
+
+  .drawer-tab {
+    flex: 1;
+    min-width: 52px;
+    padding: 10px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all var(--t-fast);
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    background: transparent;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+
+  .drawer-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+  }
+
+  .drawer-tab svg { flex-shrink: 0; }
+
+  /* Drawer content scrollable area */
+  #drawer-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    padding-bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+
+  /* ── Poster Frame: adjust for mobile ──────────────── */
+  #poster-frame {
+    top: 45%;
+  }
+
+  /* ── Status bar: mobile ───────────────────────────── */
+  #status-bar {
+    bottom: 70px;
+    font-size: 9px;
+    gap: 5px;
+  }
+
+  #status-bar .sb-sep:nth-child(6),
+  #status-bar span:last-child { display: none; } /* hide © on mobile */
+
+  /* ── Map controls: reposition ─────────────────────── */
+  #map-controls {
+    top: 12px;
+    right: 12px;
+  }
+
+  /* ── Modals: full-width on mobile ─────────────────── */
+  .modal {
+    width: 100%;
+    max-width: 100%;
+    max-height: 90vh;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    right: 0;
+    transform: none;
+    border-radius: 20px 20px 0 0;
+    border-bottom: none;
+  }
+
+  .modal.visible {
+    transform: none;
+    animation: mobileModalReveal 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes mobileModalReveal {
+    from { transform: translateY(100%); opacity: 0.8; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* ── Export overlay: mobile padding ──────────────── */
+  .eo-card { padding: 28px 20px; min-width: unset; width: 90vw; }
+
+  /* ── Toast: adjust position ───────────────────────── */
+  #toast-container {
+    bottom: 72px;
+    right: 12px;
+    left: 12px;
+    align-items: stretch;
+  }
+
+  .toast { max-width: 100%; }
+
+  /* ── Theme grid: 2-col on mobile ──────────────────── */
+  .theme-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* ── Preset grid: 3-col on mobile ─────────────────── */
+  .preset-grid { grid-template-columns: repeat(3, 1fr); }
+
+  /* ── Field rows: single column ────────────────────── */
+  .field-row { grid-template-columns: 1fr 1fr; }
+
+  /* ── Coord display: compact ───────────────────────── */
+  .coord-box { padding: 5px 6px; }
+  .coord-val { font-size: 10.5px; }
+
+  /* ── Slider rows: more compact ────────────────────── */
+  .slider-row { grid-template-columns: 44px 1fr 32px; gap: 6px; }
+
+  /* ── UAV info: compact ────────────────────────────── */
+  .uav-stat strong { font-size: 11px; }
+
+  /* ── Search dropdown ──────────────────────────────── */
+  .search-dropdown { max-height: 200px; }
+}
+
+/* ─── Very Small Screens (≤ 380px) ──────────────────────── */
+@media (max-width: 380px) {
+  .brand-name { display: none; }
+
+  #toolbar { gap: 6px; padding: 0 10px; }
+
+  .preset-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .drawer-tab span { display: none; }
+  .drawer-tab { min-width: 40px; }
+}
+
+/* ─── Safe Area for iOS Notch ────────────────────────────── */
+@supports (padding-top: env(safe-area-inset-top)) {
+  #toolbar {
+    padding-top: calc(0px + env(safe-area-inset-top));
+    height: calc(var(--toolbar-h) + env(safe-area-inset-top));
+  }
+
+  @media (max-width: 640px) {
+    #mobile-drawer {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}
+
+/* ─── Landscape Mobile ───────────────────────────────────── */
+@media (max-width: 812px) and (orientation: landscape) {
+  #mobile-drawer { max-height: 80vh; }
+  #status-bar { bottom: 56px; }
+}
+
+/* ─── Print Media ────────────────────────────────────────── */
+@media print {
+  #toolbar, #panel-left, #map-controls, #status-bar,
+  #mobile-drawer, #toast-container { display: none !important; }
+  #canvas-area { position: static; }
+  #map { height: 90vh; }
+}
+
+/* ─── High-DPI / Retina ──────────────────────────────────── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  input[type="range"]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  #poster-frame { animation: none; }
+  .splash-logo  { animation: none; }
+}
+
+/* ─── Dark Mode Forced (already dark by default) ────────── */
+@media (prefers-color-scheme: light) {
+  /* App is dark-first; no overrides needed.
+     Users can use Sahara Dust or Arctic Minimal themes
+     for light aesthetics. */
+}

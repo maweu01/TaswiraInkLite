@@ -1,0 +1,162 @@
+name: Taswira Space Ink — CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ─── Job 1: Test Suite ─────────────────────────────────
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run test suite
+        run: node tests/tests.js
+
+      - name: Verify file structure
+        run: |
+          echo "Checking required files exist..."
+          REQUIRED=(
+            "index.html"
+            "src/app.js"
+            "src/state.js"
+            "src/event-bus.js"
+            "src/core/map-engine.js"
+            "src/core/theme-engine.js"
+            "src/core/export-engine.js"
+            "src/modules/text-overlay.js"
+            "src/modules/uav-module.js"
+            "src/modules/geojson-module.js"
+            "src/services/geocoder.js"
+            "src/services/ai-service.js"
+            "src/ui/ui-controller.js"
+            "styles/main.css"
+            "styles/panels.css"
+            "styles/animations.css"
+            "styles/mobile.css"
+            "sw.js"
+            "manifest.json"
+            "data/presets/cities.js"
+            "Dockerfile"
+            "docker-compose.yml"
+            "nginx.conf"
+            "vercel.json"
+          )
+          MISSING=0
+          for f in "${REQUIRED[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "❌ MISSING: $f"
+              MISSING=$((MISSING+1))
+            else
+              echo "✓ $f"
+            fi
+          done
+          if [ $MISSING -gt 0 ]; then
+            echo "::error::$MISSING required files missing"
+            exit 1
+          fi
+          echo "All required files present ✓"
+
+      - name: Check for TODO/FIXME/PLACEHOLDER
+        run: |
+          echo "Scanning for incomplete markers..."
+          FOUND=$(grep -rn "TODO\|FIXME\|PLACEHOLDER\|NOT IMPLEMENTED" \
+            --include="*.js" --include="*.html" \
+            src/ || true)
+          if [ -n "$FOUND" ]; then
+            echo "::warning::Incomplete markers found:"
+            echo "$FOUND"
+          else
+            echo "No incomplete markers found ✓"
+          fi
+
+  # ─── Job 2: Docker Build Test ─────────────────────────
+  docker:
+    name: Docker Build
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t taswira-space-ink:ci .
+
+      - name: Test Docker healthcheck
+        run: |
+          docker run -d --name taswira-test -p 8080:8080 taswira-space-ink:ci
+          sleep 5
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080/health || echo "000")
+          docker stop taswira-test || true
+          docker rm taswira-test || true
+          if [ "$RESPONSE" != "200" ]; then
+            echo "::error::Docker healthcheck failed — HTTP $RESPONSE"
+            exit 1
+          fi
+          echo "Docker health check passed (HTTP 200) ✓"
+
+  # ─── Job 3: Deploy to Vercel (main branch only) ───────
+  deploy:
+    name: Deploy to Vercel
+    runs-on: ubuntu-latest
+    needs: [test, docker]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: production
+      url: https://taswira-space-ink.vercel.app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy to Production
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel deploy --prod --token=$VERCEL_TOKEN
+
+      - name: Post deployment comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🚀 **Taswira Space Ink** deployed to production: https://taswira-space-ink.vercel.app'
+            })
+
+  # ─── Job 4: Lighthouse CI (optional, on main) ─────────
+  lighthouse:
+    name: Lighthouse Performance Audit
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: github.ref == 'refs/heads/main'
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v11
+        with:
+          urls: |
+            https://taswira-space-ink.vercel.app
+          temporaryPublicStorage: true
+          budgetPath: .github/lighthouse-budget.json
+        continue-on-error: true

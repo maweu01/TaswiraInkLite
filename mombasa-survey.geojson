@@ -1,0 +1,164 @@
+{
+  "type": "FeatureCollection",
+  "name": "Mombasa Coastal Survey — GeoCart Mission Alpha",
+  "metadata": {
+    "operator": "GeoCart Survey Systems",
+    "date": "2026-04-15",
+    "aircraft": "DJI Phantom 4 RTK",
+    "mission_type": "Coastal Grid Survey",
+    "survey_altitude_m": 120,
+    "gsd_cm": 3.2,
+    "overlap_front": 80,
+    "overlap_side": 75,
+    "area_ha": 42.6,
+    "total_distance_km": 18.4,
+    "estimated_duration_min": 22,
+    "coordinate_system": "WGS84",
+    "home_point": [39.6682, -4.0435, 8.0]
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "flight_path_001",
+      "properties": {
+        "name": "Primary Survey Grid",
+        "type": "flight_path",
+        "mode": "grid",
+        "waypoint_count": 48,
+        "altitude_m": 120
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [39.6620, -4.0520, 8.0],
+          [39.6620, -4.0520, 60.0],
+          [39.6620, -4.0520, 120.0],
+          [39.6650, -4.0520, 120.0],
+          [39.6680, -4.0520, 120.0],
+          [39.6710, -4.0520, 120.0],
+          [39.6740, -4.0520, 120.0],
+          [39.6770, -4.0520, 120.0],
+          [39.6800, -4.0520, 120.0],
+          [39.6800, -4.0500, 120.0],
+          [39.6770, -4.0500, 120.0],
+          [39.6740, -4.0500, 120.0],
+          [39.6710, -4.0500, 120.0],
+          [39.6680, -4.0500, 120.0],
+          [39.6650, -4.0500, 120.0],
+          [39.6620, -4.0500, 120.0],
+          [39.6620, -4.0480, 120.0],
+          [39.6650, -4.0480, 120.0],
+          [39.6680, -4.0480, 120.0],
+          [39.6710, -4.0480, 120.0],
+          [39.6740, -4.0480, 120.0],
+          [39.6770, -4.0480, 120.0],
+          [39.6800, -4.0480, 120.0],
+          [39.6800, -4.0460, 120.0],
+          [39.6770, -4.0460, 120.0],
+          [39.6740, -4.0460, 120.0],
+          [39.6710, -4.0460, 120.0],
+          [39.6680, -4.0460, 120.0],
+          [39.6650, -4.0460, 120.0],
+          [39.6620, -4.0460, 120.0],
+          [39.6620, -4.0440, 120.0],
+          [39.6650, -4.0440, 120.0],
+          [39.6680, -4.0440, 120.0],
+          [39.6710, -4.0440, 120.0],
+          [39.6740, -4.0440, 120.0],
+          [39.6770, -4.0440, 120.0],
+          [39.6800, -4.0440, 120.0],
+          [39.6800, -4.0420, 120.0],
+          [39.6770, -4.0420, 120.0],
+          [39.6740, -4.0420, 120.0],
+          [39.6710, -4.0420, 120.0],
+          [39.6680, -4.0420, 120.0],
+          [39.6650, -4.0420, 120.0],
+          [39.6620, -4.0420, 120.0],
+          [39.6620, -4.0420, 60.0],
+          [39.6620, -4.0420, 8.0],
+          [39.6682, -4.0435, 8.0]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "home_point",
+      "properties": {
+        "name": "Home Point / Launch Site",
+        "type": "home",
+        "description": "Mombasa Port Authority Staging Area"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.6682, -4.0435, 8.0]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "survey_boundary",
+      "properties": {
+        "name": "Survey Area Boundary",
+        "type": "boundary",
+        "area_ha": 42.6
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [39.6610, -4.0530],
+          [39.6810, -4.0530],
+          [39.6810, -4.0410],
+          [39.6610, -4.0410],
+          [39.6610, -4.0530]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gcp_001",
+      "properties": {
+        "name": "GCP-001",
+        "type": "ground_control_point",
+        "accuracy_mm": 12,
+        "northing": 9553842.12,
+        "easting": 528346.78,
+        "elevation_m": 6.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.6645, -4.0492]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gcp_002",
+      "properties": {
+        "name": "GCP-002",
+        "type": "ground_control_point",
+        "accuracy_mm": 9,
+        "northing": 9553920.44,
+        "easting": 528781.22,
+        "elevation_m": 5.8
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.6745, -4.0460]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "gcp_003",
+      "properties": {
+        "name": "GCP-003",
+        "type": "ground_control_point",
+        "accuracy_mm": 14,
+        "northing": 9554010.88,
+        "easting": 528562.15,
+        "elevation_m": 7.1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [39.6695, -4.0435]
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/*",
+    "resourceSizes": [
+      { "resourceType": "document",   "budget": 20 },
+      { "resourceType": "script",     "budget": 500 },
+      { "resourceType": "stylesheet", "budget": 80 },
+      { "resourceType": "font",       "budget": 150 },
+      { "resourceType": "total",      "budget": 1000 }
+    ],
+    "resourceCounts": [
+      { "resourceType": "third-party", "budget": 10 }
+    ],
+    "timings": [
+      { "metric": "interactive",          "budget": 3500 },
+      { "metric": "first-contentful-paint","budget": 1500 },
+      { "metric": "largest-contentful-paint","budget": 2500 }
+    ]
+  }
+]

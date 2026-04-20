@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  taswira:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: taswira-space-ink-v2
+    ports:
+      - "${APP_PORT:-7200}:8080"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    labels:
+      - "com.taswira.app=space-ink"
+      - "com.taswira.version=2.0.0"

@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "name": "Nairobi Central Business District",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "nairobi_cbd",
+      "properties": {
+        "name": "Nairobi CBD",
+        "city": "Nairobi",
+        "country": "Kenya",
+        "population": 950000,
+        "area_km2": 18.5,
+        "established": 1900
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [36.8000, -1.2700],
+          [36.8350, -1.2700],
+          [36.8450, -1.2800],
+          [36.8450, -1.3050],
+          [36.8200, -1.3100],
+          [36.8000, -1.3050],
+          [36.7950, -1.2900],
+          [36.8000, -1.2700]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "uhuru_park",
+      "properties": { "name": "Uhuru Park", "type": "park", "area_ha": 12.0 },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [36.8175, -1.2900]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cbd_roads",
+      "properties": { "name": "Main CBD Grid", "type": "roads" },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [[36.8000, -1.2800], [36.8450, -1.2800]],
+          [[36.8000, -1.2900], [36.8450, -1.2900]],
+          [[36.8000, -1.3000], [36.8450, -1.3000]],
+          [[36.8100, -1.2700], [36.8100, -1.3050]],
+          [[36.8200, -1.2700], [36.8200, -1.3050]],
+          [[36.8300, -1.2700], [36.8300, -1.3050]]
+        ]
+      }
+    }
+  ]
+}

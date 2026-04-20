@@ -1,0 +1,31 @@
+{
+  "name": "taswira-space-ink",
+  "version": "2.0.0",
+  "description": "Taswira Space Ink — The Cartographic Artistry Engine v2",
+  "author": "Taswira Space Ink Contributors",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev":        "npx serve . -p 7200 --cors",
+    "dev:python": "python3 -m http.server 7200",
+    "test":       "node tests/tests.js",
+    "lint":       "echo 'Add ESLint for production use'",
+    "docker:up":  "docker compose up -d --build",
+    "docker:down":"docker compose down",
+    "docker:logs":"docker compose logs -f"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "cartography", "map-poster", "openstreetmap", "geojson",
+    "uav", "drone", "maplibre", "africa", "gis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/taswira-space-ink.git"
+  },
+  "homepage": "https://taswira-space-ink.vercel.app"
+}

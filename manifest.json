@@ -1,0 +1,37 @@
+{
+  "name": "Taswira Space Ink",
+  "short_name": "Taswira",
+  "description": "The Cartographic Artistry Engine — design and export high-resolution map posters",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#06070F",
+  "theme_color": "#06070F",
+  "categories": ["productivity", "design", "maps"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='32' fill='%2306070F'/%3E%3Ccircle cx='96' cy='96' r='72' stroke='url(%23g1)' stroke-width='4' fill='none'/%3E%3Cpath d='M56 96 Q72 72 96 96 Q120 120 136 96' stroke='url(%23g2)' stroke-width='6' fill='none'/%3E%3Ccircle cx='96' cy='96' r='10' fill='url(%23g1)'/%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%235B8DEF'/%3E%3Cstop offset='100%25' stop-color='%23A78BFA'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%235B8DEF'/%3E%3Cstop offset='100%25' stop-color='%2300C9A7'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='80' fill='%2306070F'/%3E%3Ccircle cx='256' cy='256' r='200' stroke='url(%23g1)' stroke-width='10' fill='none'/%3E%3Cpath d='M140 256 Q190 190 256 256 Q322 322 370 256' stroke='url(%23g2)' stroke-width='16' fill='none'/%3E%3Ccircle cx='256' cy='256' r='28' fill='url(%23g1)'/%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%235B8DEF'/%3E%3Cstop offset='100%25' stop-color='%23A78BFA'/%3E%3C/linearGradient%3E%3ClinearGradient id='g2' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0%25' stop-color='%235B8DEF'/%3E%3Cstop offset='100%25' stop-color='%2300C9A7'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Poster",
+      "short_name": "New",
+      "description": "Start a new map poster",
+      "url": "/",
+      "icons": [{ "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='16' fill='%235B8DEF'/%3E%3Ctext x='48' y='66' font-size='52' text-anchor='middle' fill='white'%3E%2B%3C/text%3E%3C/svg%3E", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}
